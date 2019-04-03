@@ -85,11 +85,10 @@ barplot(d[2:10,]$freq, las = 2, names.arg = d[2:10,]$word,
 #clustering the documents, find optimal k
 wss <- numeric(15) 
 for (k in 1:10) wss[k] <- sum(kmeans(tdm, centers=k)$withinss)
-plot(wss, type="b") #seems like 2 or 3 will cover it
+plot(wss, type="b") 
 
 crime.kmeans <- kmeans(tdm,3)
-crime.kmeans$cluster #lets looks at cluster membership
-
+crime.kmeans$cluster 
 tdm$cluster <- crime.kmeans$cluster
 length(tdm[tdm$cluster==1,]$words)
 tdm[tdm$cluster==2,]$words
