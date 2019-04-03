@@ -30,7 +30,7 @@ crime_text$desc <- gsub("-","",   crime_text$desc)
 stopwords("english")
 
 
-#create corpus and clean up text before creating docuuent term matrix
+#create corpus and clean up text before creating document term matrix
 crime_corpus <- Corpus(VectorSource(crime_text$desc))
 
 crime_corpus <- tm_map(crime_corpus, stemDocument)
@@ -70,22 +70,19 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 1,
           max.words=200, random.order=FALSE, rot.per=0.35, 
           colors=brewer.pal(8, "Dark2"))
 
-#user (code for  @user included in tweet most frequent lets see what it is associated with)
-#and web address 
+#Checking the association of the most frequent words
 findAssocs(tdm, terms = c("vehicle", "theft"), corlimit = .0)
 
 findAssocs(tdm, terms = c("owners"), corlimit = .0) 
 
-#normally set a limit for correlations to a reasonable r size, bui this is sparse data and we trimmed terms
 
 
-
-#lets make a bar chart of frequent words
+#bar chart of frequent words
 barplot(d[2:10,]$freq, las = 2, names.arg = d[2:10,]$word,
         col ="lightblue", main ="Most frequent words",
         ylab = "Word frequencies")
 
-#lets cluster the documents, but first find optimal k
+#clustering the documents, find optimal k
 wss <- numeric(15) 
 for (k in 1:10) wss[k] <- sum(kmeans(tdm, centers=k)$withinss)
 plot(wss, type="b") #seems like 2 or 3 will cover it
