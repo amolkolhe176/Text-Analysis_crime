@@ -97,8 +97,6 @@ tdm$cluster <- crime.kmeans$cluster
 length(tdm[tdm$cluster==1,]$words)
 tdm[tdm$cluster==2,]$words
 
-#lets do some sentiment analysis with each word as a column
-#document term matrix, 
 
 
 
